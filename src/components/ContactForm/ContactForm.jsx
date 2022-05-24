@@ -1,18 +1,39 @@
 import { Formik } from 'formik';
 import { nanoid } from 'nanoid';
 import { StyledForm, Input, Label, Button } from './ContactForm.styled';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { adder } from 'redux/contactsSlice';
 
 const nameInputId = nanoid();
 const numberInputId = nanoid();
 
-export const ContactForm = ({onFormSubmit}) => (
+export const ContactForm = () => {
+  const contacts = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
+  const onFormSubmit = (values, actions) => {
+    const isDublicate = contacts.find(contact => {
+      return contact.name === values.name;
+    });
+
+    if (isDublicate) {
+      alert(`${values.name} is already in contacts`);
+      return;
+    }
+
+    dispatch(adder(values));
+
+    actions.resetForm();
+  };
+
+  return (
     <Formik
-    initialValues={{
-      name: '',
-      number: ''
-    }}
-    onSubmit={onFormSubmit}>
+      initialValues={{
+        name: '',
+        number: '',
+      }}
+      onSubmit={onFormSubmit}
+    >
       <StyledForm>
         <Label htmlFor={nameInputId}>Name</Label>
         <Input
@@ -34,11 +55,8 @@ export const ContactForm = ({onFormSubmit}) => (
           required
         />
 
-        <Button type='submit'>Add contact</Button>
+        <Button type="submit">Add contact</Button>
       </StyledForm>
-  </Formik>
-)
-
-ContactForm.propTypes = {
-  onFormSubmit: PropTypes.func.isRequired
-}
+    </Formik>
+  );
+};
