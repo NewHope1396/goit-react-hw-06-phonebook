@@ -8,7 +8,7 @@ const nameInputId = nanoid();
 const numberInputId = nanoid();
 
 export const ContactForm = () => {
-  const contacts = useSelector(state => state.contacts.contacts);
+  const contacts = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
 
   const onFormSubmit = (values, actions) => {
