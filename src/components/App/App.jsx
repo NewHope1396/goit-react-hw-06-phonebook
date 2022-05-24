@@ -4,14 +4,6 @@ import { Filter } from 'components/Filter/Filter';
 import { Container, ContactsSection } from './App.styled';
 
 export const App = () => {
-  // const [contacts, setContacts] = useState(
-  //   JSON.parse(localStorage.getItem('contacts')) ?? []
-  // );
-
-  // useEffect(() => {
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-
   return (
     <Container>
       <h1>Phonebook</h1>

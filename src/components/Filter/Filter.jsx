@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid';
 import { Input, Label, Container } from './Filter.styled';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from 'redux/filterSlice';
 
